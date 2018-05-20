@@ -9,6 +9,13 @@ namespace JPanGraphs
     public class Vertex<T> where T : IComparable<T>
     {
         public T item;
+        private bool visited;
+        public bool Visited
+        {
+            get { return visited; }
+            set { visited = value; }
+        }
+
         public Vertex(T value)
         {
             item = value;
