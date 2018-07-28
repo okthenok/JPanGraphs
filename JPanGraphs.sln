@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2018
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JPanGraphs", "JPanGraphs\JPanGraphs.csproj", "{06A34E5F-3608-4AA9-A448-6FE44C4AD668}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{C44C43A3-E111-435A-ADE8-A5059DD6E3B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +17,15 @@ Global
 		{06A34E5F-3608-4AA9-A448-6FE44C4AD668}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06A34E5F-3608-4AA9-A448-6FE44C4AD668}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06A34E5F-3608-4AA9-A448-6FE44C4AD668}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C44C43A3-E111-435A-ADE8-A5059DD6E3B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C44C43A3-E111-435A-ADE8-A5059DD6E3B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C44C43A3-E111-435A-ADE8-A5059DD6E3B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C44C43A3-E111-435A-ADE8-A5059DD6E3B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {80B71588-C6DD-42BF-9354-BD1E958EFECE}
 	EndGlobalSection
 EndGlobal
