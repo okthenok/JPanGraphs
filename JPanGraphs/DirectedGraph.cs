@@ -65,7 +65,7 @@ namespace JPanGraphs
         public void BFS(Vertex<T> vertex)
         {
             double totalWeight = 0;
-            //Console.WriteLine(vertex.item);
+            Console.WriteLine(vertex.item);
             Queue<Vertex<T>> queue = new Queue<Vertex<T>>();
             for (int i = 0; i < vertices.Count; i++)
             {
