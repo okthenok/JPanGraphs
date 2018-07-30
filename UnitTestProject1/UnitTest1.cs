@@ -26,7 +26,7 @@ namespace UnitTestProject1
             graph.AddEdge(vertex3, vertex7, 9);
             graph.AddEdge(vertex2, vertex4, 1);
             graph.AddEdge(vertex6, vertex1, 7);
-            graph.DFS(vertex1);
+            graph.DFS(vertex1, 0);
 
         }
     }

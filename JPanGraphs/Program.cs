@@ -10,6 +10,17 @@ namespace JPanGraphs
     {
         static void Main(string[] args)
         {
+            //DirectedGraph<int> graph = new DirectedGraph<int>();
+            //Vertex<int> vertex0 = new Vertex<int>(0);
+            //Vertex<int> vertex1 = new Vertex<int>(1);
+            //Vertex<int> vertex2 = new Vertex<int>(2);
+            //Vertex<int> vertex3 = new Vertex<int>(3);
+            //Vertex<int> vertex4 = new Vertex<int>(4);
+            //Vertex<int> vertex5 = new Vertex<int>(5);
+            //Vertex<int> vertex6 = new Vertex<int>(6);
+            //Vertex<int> vertex7 = new Vertex<int>(7);
+            //Vertex<int> vertex8 = new Vertex<int>(8);
+            #region oldEdges2
             DirectedGraph<int> tree = new DirectedGraph<int>();
             Vertex<int> vertex1 = new Vertex<int>(1);
             Vertex<int> vertex2 = new Vertex<int>(2);
@@ -26,6 +37,8 @@ namespace JPanGraphs
             tree.AddEdge(vertex3, vertex6, 2);
             tree.AddEdge(vertex3, vertex7, 7);
             tree.AddEdge(vertex5, vertex8, 4);
+            tree.Dijkstra(vertex1, vertex8);
+            #endregion
             #region oldEdges
             //tree.AddEdge(vertex1, vertex2, 5);
             //tree.AddEdge(vertex5, vertex1, 3);
@@ -43,7 +56,7 @@ namespace JPanGraphs
             //tree.AddEdge(vertex3, vertex6, 13);
             //graph.DFS(vertex1, 0);
             #endregion
-            tree.BFS(vertex1);
+            //tree.BFS(vertex1);
             Console.ReadLine();
             //    DirectedGraph<int> graph = new DirectedGraph<int>();
             //    string input;

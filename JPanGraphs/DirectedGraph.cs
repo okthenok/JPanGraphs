@@ -10,7 +10,7 @@ namespace JPanGraphs
     {
         public List<Vertex<T>> vertices = new List<Vertex<T>>();
         public DirectedGraph() { }
-        public void AddEdge(Vertex<T> vertex1, Vertex<T> vertex2, double weight)
+        public void AddEdge(Vertex<T> vertex1, Vertex<T> vertex2, float weight)
         {
             vertex1.weightedEdges.Add(new WeightedEdge<T>(vertex1, vertex2, weight));
             vertex2.weightedEdges.Add(new WeightedEdge<T>(vertex1, vertex2, weight));
@@ -84,6 +84,61 @@ namespace JPanGraphs
                 Console.WriteLine(queue.Dequeue().item);
             }
             Console.WriteLine("Total weight: " + totalWeight);
+        }
+        public void Dijkstra(Vertex<T> startVertex, Vertex<T> endVertex)
+        {
+            Queue<Vertex<T>> priorityQueue = new Queue<Vertex<T>>();
+            for (int i = 0; i < vertices.Count; i++)
+            {
+                vertices[i].distance = float.PositiveInfinity;
+                vertices[i].Visited = false;
+                vertices[i].founder = null;
+            }
+            startVertex.distance = 0;
+            priorityQueue.Enqueue(startVertex);
+
+            while (priorityQueue.Count > 0)
+            {
+                var current = priorityQueue.Dequeue();
+                //if current is the end vertex, break
+                if (current == endVertex)
+                {
+                    break;
+                }
+
+                for (int i = 0; i < current.weightedEdges.Count; i++)
+                {
+                    var neighbor = current.weightedEdges[i].endVertex;
+
+                    float tentativeDistance = current.distance + current.weightedEdges[i].weight;
+                    if (tentativeDistance < neighbor.distance)
+                    {
+                        neighbor.distance = tentativeDistance;
+                        neighbor.founder = current;
+                        neighbor.Visited = false;
+                    }
+
+                    //if not visited and not in queue, add to queue
+                    if (!(neighbor.Visited && priorityQueue.Contains(neighbor)))
+                    {
+                        priorityQueue.Enqueue(neighbor);
+                    }
+                }
+            }
+
+            //stack and add end
+            Stack<Vertex<T>> path = new Stack<Vertex<T>>();
+            var curr = endVertex;
+            while (curr != startVertex)
+            {
+                path.Push(curr);
+                curr = curr.founder;
+            }
+            path.Push(startVertex);
+            while (path.Count > 0)
+            {
+                Console.WriteLine(path.Peek().item + " " + path.Pop().distance);
+            }
         }
     }
 }

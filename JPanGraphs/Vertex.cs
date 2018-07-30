@@ -10,6 +10,8 @@ namespace JPanGraphs
     {
         public T item;
         public bool Visited { get; set; }
+        public float distance;
+        public Vertex<T> founder;
 
         public Vertex(T value)
         {

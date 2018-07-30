@@ -10,8 +10,8 @@ namespace JPanGraphs
     {
         public Vertex<T> startVertex;
         public Vertex<T> endVertex;
-        public double weight;
-        public WeightedEdge(Vertex<T> StartVertex, Vertex<T> EndVertex, double Weight)
+        public float weight;
+        public WeightedEdge(Vertex<T> StartVertex, Vertex<T> EndVertex, float Weight)
         {
             startVertex = StartVertex;
             endVertex = EndVertex;
