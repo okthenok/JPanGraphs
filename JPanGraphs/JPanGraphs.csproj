@@ -46,7 +46,9 @@
     <Compile Include="DirectedGraph.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Vertex.cs" />
+    <Compile Include="UndirectedGraph.cs" />
+    <Compile Include="DVertex.cs" />
+    <Compile Include="UVertex.cs" />
     <Compile Include="WeightedEdge.cs" />
   </ItemGroup>
   <ItemGroup>

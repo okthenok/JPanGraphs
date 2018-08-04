@@ -8,9 +8,9 @@ namespace JPanGraphs
 {
     public class DirectedGraph<T> where T : IComparable<T>
     {
-        public List<Vertex<T>> vertices = new List<Vertex<T>>();
+        public List<DVertex<T>> vertices = new List<DVertex<T>>();
         public DirectedGraph() { }
-        public void AddEdge(Vertex<T> vertex1, Vertex<T> vertex2, float weight)
+        public void AddEdge(DVertex<T> vertex1, DVertex<T> vertex2, float weight)
         {
             vertex1.weightedEdges.Add(new WeightedEdge<T>(vertex1, vertex2, weight));
             vertex2.weightedEdges.Add(new WeightedEdge<T>(vertex1, vertex2, weight));
@@ -23,7 +23,7 @@ namespace JPanGraphs
                 vertices.Add(vertex2);
             }
         }
-        public void RemoveEdge(Vertex<T> vertex1, Vertex<T> vertex2)
+        public void RemoveEdge(DVertex<T> vertex1, DVertex<T> vertex2)
         {
             for (int i = 0; i < vertices.Count; i++)
             {
@@ -49,7 +49,7 @@ namespace JPanGraphs
                 }
             }
         }
-        public void DFS(Vertex<T> vertex, double weight)
+        public void DFS(DVertex<T> vertex, double weight)
         {
             Console.WriteLine(vertex.item + " " + weight);
             vertex.Visited = true;
@@ -62,11 +62,11 @@ namespace JPanGraphs
                 }
             }
         }
-        public void BFS(Vertex<T> vertex)
+        public void BFS(DVertex<T> vertex)
         {
             double totalWeight = 0;
             Console.WriteLine(vertex.item);
-            Queue<Vertex<T>> queue = new Queue<Vertex<T>>();
+            Queue<DVertex<T>> queue = new Queue<DVertex<T>>();
             for (int i = 0; i < vertices.Count; i++)
             {
                 for (int j = 0; j < vertices[i].weightedEdges.Count; j++)
@@ -85,9 +85,9 @@ namespace JPanGraphs
             }
             Console.WriteLine("Total weight: " + totalWeight);
         }
-        public void Dijkstra(Vertex<T> startVertex, Vertex<T> endVertex)
+        public void Dijkstra(DVertex<T> startVertex, DVertex<T> endVertex)
         {
-            Queue<Vertex<T>> priorityQueue = new Queue<Vertex<T>>();
+            Queue<DVertex<T>> priorityQueue = new Queue<DVertex<T>>();
             for (int i = 0; i < vertices.Count; i++)
             {
                 vertices[i].distance = float.PositiveInfinity;
@@ -127,7 +127,7 @@ namespace JPanGraphs
             }
 
             //stack and add end
-            Stack<Vertex<T>> path = new Stack<Vertex<T>>();
+            Stack<DVertex<T>> path = new Stack<DVertex<T>>();
             var curr = endVertex;
             while (curr != startVertex)
             {
@@ -139,6 +139,77 @@ namespace JPanGraphs
             {
                 Console.WriteLine(path.Peek().item + " " + path.Pop().distance);
             }
+        }
+        public void AStar(DVertex<T> startVertex, DVertex<T> endVertex)
+        {
+            Queue<DVertex<T>> priorityQueue = new Queue<DVertex<T>>();
+            for (int i = 0; i < vertices.Count; i++)
+            {
+                vertices[i].distance = float.PositiveInfinity;
+                vertices[i].finalDistance = float.PositiveInfinity;
+                vertices[i].Visited = false;
+                vertices[i].founder = null;
+            }
+            startVertex.distance = 0;
+            startVertex.finalDistance = Mathattan(startVertex, endVertex);
+            priorityQueue.Enqueue(startVertex);
+
+            while (priorityQueue.Count > 0)
+            {
+                var current = priorityQueue.Dequeue();
+                if (current == endVertex)
+                {
+                    break;
+                }
+
+                for (int i = 0; i < current.weightedEdges.Count; i++)
+                {
+                    var neighbor = current.weightedEdges[i].endVertex;
+
+                    float tentativeDistance = current.distance + current.weightedEdges[i].weight;
+                    if (tentativeDistance < neighbor.distance)
+                    {
+                        neighbor.distance = tentativeDistance;
+                        neighbor.founder = current;
+                        neighbor.Visited = false;
+                        neighbor.finalDistance = neighbor.distance + Mathattan(neighbor, endVertex);
+                    }
+
+                    //if not visited and not in queue, add to queue
+                    if (!(neighbor.Visited && priorityQueue.Contains(neighbor)))
+                    {
+                        priorityQueue.Enqueue(neighbor);
+                    }
+                }
+            }
+
+            //stack and add end
+            Stack<DVertex<T>> path = new Stack<DVertex<T>>();
+            var curr = endVertex;
+            while (curr.founder != null)
+            {
+                path.Push(curr);
+                curr = curr.founder;
+            }
+            path.Push(startVertex);
+            while (path.Count > 0)
+            {
+                Console.WriteLine(path.Peek().item + " " + path.Pop().distance);
+            }
+        }
+        private float Mathattan(DVertex<T> vertex, DVertex<T> endVertex)
+        {
+            float dx = Math.Abs(vertex.x - endVertex.x);
+            float dy = Math.Abs(vertex.y - endVertex.y);
+            float D = float.PositiveInfinity;
+            for (int i = 0; i < vertex.weightedEdges.Count; i++)
+            {
+                if (vertex.weightedEdges[i].weight < D)
+                {
+                    D = vertex.weightedEdges[i].weight;
+                }
+            }
+            return D * (dx + dy);
         }
     }
 }

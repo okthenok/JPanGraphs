@@ -10,8 +10,37 @@ namespace JPanGraphs
     {
         static void Main(string[] args)
         {
-            //DirectedGraph<int> graph = new DirectedGraph<int>();
-            //Vertex<int> vertex0 = new Vertex<int>(0);
+            DirectedGraph<int> graph = new DirectedGraph<int>();
+            DVertex<int>[,] vertices = new DVertex<int>[10, 10];
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    DVertex<int> temp = new DVertex<int>(i, j);
+                    vertices[i, j] = temp;
+                    if (i < 9 && vertices[i + 1, j] != null)
+                    {
+                        graph.AddEdge(vertices[i, j], vertices[i + 1, j], 1);
+                    }
+                    if (i > 0 && vertices[i - 1, j] != null)
+                    {
+                        graph.AddEdge(vertices[i, j], vertices[i - 1, j], 1);
+                    }
+                    if (j < 9 && vertices[i, j + 1] != null)
+                    {
+                        graph.AddEdge(vertices[i, j], vertices[i, j + 1], 1);
+                    }
+                    if (j > 0 && vertices[i, j - 1] != null)
+                    {
+                        graph.AddEdge(vertices[i, j], vertices[i, j - 1], 1);
+                    }
+                }
+            }
+            DVertex<int> start = new DVertex<int>(0, 0);
+            DVertex<int> end = new DVertex<int>(9, 9);
+            graph.AStar(start, end);
+            #region oldEdges2
+            //DirectedGraph<int> tree = new DirectedGraph<int>();
             //Vertex<int> vertex1 = new Vertex<int>(1);
             //Vertex<int> vertex2 = new Vertex<int>(2);
             //Vertex<int> vertex3 = new Vertex<int>(3);
@@ -20,24 +49,14 @@ namespace JPanGraphs
             //Vertex<int> vertex6 = new Vertex<int>(6);
             //Vertex<int> vertex7 = new Vertex<int>(7);
             //Vertex<int> vertex8 = new Vertex<int>(8);
-            #region oldEdges2
-            DirectedGraph<int> tree = new DirectedGraph<int>();
-            Vertex<int> vertex1 = new Vertex<int>(1);
-            Vertex<int> vertex2 = new Vertex<int>(2);
-            Vertex<int> vertex3 = new Vertex<int>(3);
-            Vertex<int> vertex4 = new Vertex<int>(4);
-            Vertex<int> vertex5 = new Vertex<int>(5);
-            Vertex<int> vertex6 = new Vertex<int>(6);
-            Vertex<int> vertex7 = new Vertex<int>(7);
-            Vertex<int> vertex8 = new Vertex<int>(8);
-            tree.AddEdge(vertex1, vertex2, 5);
-            tree.AddEdge(vertex1, vertex3, 3);
-            tree.AddEdge(vertex2, vertex4, 8);
-            tree.AddEdge(vertex2, vertex5, 9);
-            tree.AddEdge(vertex3, vertex6, 2);
-            tree.AddEdge(vertex3, vertex7, 7);
-            tree.AddEdge(vertex5, vertex8, 4);
-            tree.Dijkstra(vertex1, vertex8);
+            //tree.AddEdge(vertex1, vertex2, 5);
+            //tree.AddEdge(vertex1, vertex3, 3);
+            //tree.AddEdge(vertex2, vertex4, 8);
+            //tree.AddEdge(vertex2, vertex5, 9);
+            //tree.AddEdge(vertex3, vertex6, 2);
+            //tree.AddEdge(vertex3, vertex7, 7);
+            //tree.AddEdge(vertex5, vertex8, 4);
+            //tree.Dijkstra(vertex1, vertex8);
             #endregion
             #region oldEdges
             //tree.AddEdge(vertex1, vertex2, 5);
@@ -58,6 +77,7 @@ namespace JPanGraphs
             #endregion
             //tree.BFS(vertex1);
             Console.ReadLine();
+            #region old stuff
             //    DirectedGraph<int> graph = new DirectedGraph<int>();
             //    string input;
             //    while (true)
@@ -145,6 +165,7 @@ namespace JPanGraphs
             //        }
             //        graph.AddVertex(int.Parse(input));
             //    }
+            #endregion
         }
     }
 }

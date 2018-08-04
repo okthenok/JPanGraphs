@@ -6,16 +6,24 @@ using System.Threading.Tasks;
 
 namespace JPanGraphs
 {
-    public class Vertex<T> where T : IComparable<T>
+    public class DVertex<T> where T : IComparable<T>
     {
         public T item;
+        public float x;
+        public float y;
         public bool Visited { get; set; }
         public float distance;
-        public Vertex<T> founder;
+        public float finalDistance;
+        public DVertex<T> founder;
 
-        public Vertex(T value)
+        public DVertex(T value)
         {
             item = value;
+        }
+        public DVertex(float xvalue, float yvalue)
+        {
+            x = xvalue;
+            y = yvalue;
         }
         //public List<Vertex<T>> connections = new List<Vertex<T>>();
         public List<WeightedEdge<T>> weightedEdges = new List<WeightedEdge<T>>();

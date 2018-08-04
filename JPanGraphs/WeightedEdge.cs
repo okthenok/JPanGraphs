@@ -8,10 +8,10 @@ namespace JPanGraphs
 {
     public class WeightedEdge<T> where T : IComparable<T>
     {
-        public Vertex<T> startVertex;
-        public Vertex<T> endVertex;
+        public DVertex<T> startVertex;
+        public DVertex<T> endVertex;
         public float weight;
-        public WeightedEdge(Vertex<T> StartVertex, Vertex<T> EndVertex, float Weight)
+        public WeightedEdge(DVertex<T> StartVertex, DVertex<T> EndVertex, float Weight)
         {
             startVertex = StartVertex;
             endVertex = EndVertex;
