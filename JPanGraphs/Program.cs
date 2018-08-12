@@ -21,24 +21,36 @@ namespace JPanGraphs
                     if (i < 9 && vertices[i + 1, j] != null)
                     {
                         graph.AddEdge(vertices[i, j], vertices[i + 1, j], 1);
+                        graph.AddEdge(vertices[i + 1, j], vertices[i, j], 1);
                     }
                     if (i > 0 && vertices[i - 1, j] != null)
                     {
                         graph.AddEdge(vertices[i, j], vertices[i - 1, j], 1);
+                        graph.AddEdge(vertices[i - 1, j], vertices[i, j], 1);
                     }
                     if (j < 9 && vertices[i, j + 1] != null)
                     {
                         graph.AddEdge(vertices[i, j], vertices[i, j + 1], 1);
+                        graph.AddEdge(vertices[i, j + 1], vertices[i, j], 1);
                     }
                     if (j > 0 && vertices[i, j - 1] != null)
                     {
                         graph.AddEdge(vertices[i, j], vertices[i, j - 1], 1);
+                        graph.AddEdge(vertices[i, j - 1], vertices[i, j], 1);
                     }
                 }
             }
-            DVertex<int> start = new DVertex<int>(0, 0);
-            DVertex<int> end = new DVertex<int>(9, 9);
-            graph.AStar(start, end);
+            for (int i = 0; i < vertices[0, 9].weightedEdges.Count; i++)
+            {
+                vertices[0, 9].weightedEdges[i].weight = 2;
+            }
+            for (int i = 0; i < vertices[1, 8].weightedEdges.Count; i++)
+            {
+                vertices[1, 8].weightedEdges[i].weight = 2;
+            }
+            DVertex<int> start = vertices[0, 0];
+            DVertex<int> end = vertices[9, 9];
+            IEnumerable<DVertex<int>> path = graph.AStar(start, end);
             #region oldEdges2
             //DirectedGraph<int> tree = new DirectedGraph<int>();
             //Vertex<int> vertex1 = new Vertex<int>(1);

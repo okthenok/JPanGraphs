@@ -140,7 +140,7 @@ namespace JPanGraphs
                 Console.WriteLine(path.Peek().item + " " + path.Pop().distance);
             }
         }
-        public void AStar(DVertex<T> startVertex, DVertex<T> endVertex)
+        public IEnumerable<DVertex<T>> AStar(DVertex<T> startVertex, DVertex<T> endVertex)
         {
             Queue<DVertex<T>> priorityQueue = new Queue<DVertex<T>>();
             for (int i = 0; i < vertices.Count; i++)
@@ -157,6 +157,7 @@ namespace JPanGraphs
             while (priorityQueue.Count > 0)
             {
                 var current = priorityQueue.Dequeue();
+                current.Visited = true;
                 if (current == endVertex)
                 {
                     break;
@@ -176,7 +177,7 @@ namespace JPanGraphs
                     }
 
                     //if not visited and not in queue, add to queue
-                    if (!(neighbor.Visited && priorityQueue.Contains(neighbor)))
+                    if (!neighbor.Visited && !priorityQueue.Contains(neighbor))
                     {
                         priorityQueue.Enqueue(neighbor);
                     }
@@ -192,10 +193,7 @@ namespace JPanGraphs
                 curr = curr.founder;
             }
             path.Push(startVertex);
-            while (path.Count > 0)
-            {
-                Console.WriteLine(path.Peek().item + " " + path.Pop().distance);
-            }
+            return path;
         }
         private float Mathattan(DVertex<T> vertex, DVertex<T> endVertex)
         {

@@ -49,6 +49,7 @@
     <Compile Include="UndirectedGraph.cs" />
     <Compile Include="DVertex.cs" />
     <Compile Include="UVertex.cs" />
+    <Compile Include="UWeightedEdge.cs" />
     <Compile Include="WeightedEdge.cs" />
   </ItemGroup>
   <ItemGroup>
